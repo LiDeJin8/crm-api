@@ -12,6 +12,7 @@
         <result column="delete_flag" property="deleteFlag" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
+        <result column="depart_id" property="departId"/>
     </resultMap>
 
     <select id="getManagerPage" resultType="com.crm.vo.SysManagerVO">
@@ -21,9 +22,12 @@
         <if test="query.account != null and query.account != ''  ">
             and sm.account like concat('%',#{query.account},'%')
         </if>
-        <if test="query.type != null ">
-            and sm.type = #{query.type}
+        <if test="query.checkedDepartId != null ">
+            and sm.depart_id = #{query.checkedDepartId}
         </if>
+        <!--<if test="query.type != null ">
+            and sm.type = #{query.type}
+        </if>-->
         order by sm.create_time desc
     </select>
 
